@@ -1,4 +1,4 @@
-package dev.martinsv.newsapp.ui.theme
+package dev.martinsv.newsapp.core.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
