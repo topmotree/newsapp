@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.martinsv.newsapp.BuildConfig
 import dev.martinsv.newsapp.core.data.network.BASE_URL
+import dev.martinsv.newsapp.core.data.network.NewsApiService
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -66,4 +67,9 @@ object NetworkModule {
         .client(httpClient)
         .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
         .build()
+
+    @Provides
+    @Singleton
+    fun provideNewsApiService(retrofit: Retrofit): NewsApiService =
+        retrofit.create(NewsApiService::class.java)
 }
