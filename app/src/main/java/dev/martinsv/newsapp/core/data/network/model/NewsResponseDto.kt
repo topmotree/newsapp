@@ -10,5 +10,5 @@ data class NewsResponseDto(
     //In the case of error a code and message property will be populated.
     val status: String,
     val totalResults: Int,
-    val articles: List<ArticleDto>
+    val articles: List<ArticleDto> = emptyList()
 )

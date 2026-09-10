@@ -2,15 +2,14 @@ package dev.martinsv.newsapp.core.data.network.model
 
 import kotlinx.serialization.Serializable
 
-//TODO consider change fields to nullable - to prevent serialization exception. SourceDto as well
 @Serializable
 data class ArticleDto(
-    val source: SourceDto,
-    val author: String,
-    val title: String,
-    val description: String,
-    val url: String,
-    val urlToImage: String,
-    val publishedAt: String,
-    val content: String
+    val source: SourceDto? = null,
+    val author: String? = null,
+    val title: String? = null,
+    val description: String? = null,
+    val url: String? = null,
+    val urlToImage: String? = null,
+    val publishedAt: String? = null,
+    val content: String? = null
 )
