@@ -75,6 +75,9 @@ dependencies {
     //coroutines
     implementation(libs.kotlinx.coroutines.android)
 
+    //UI
+    implementation(libs.coil)
+
     //testing
     testImplementation(libs.mockwebserver)
     testImplementation(libs.kotlinx.coroutines.test)
