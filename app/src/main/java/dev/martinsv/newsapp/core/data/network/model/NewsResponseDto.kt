@@ -3,7 +3,7 @@ package dev.martinsv.newsapp.core.data.network.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NewsEverythingResponse(
+data class NewsResponseDto(
     //TODO handle error response - test it without api key
 
     //If the request was successful or not. Options: ok, error.

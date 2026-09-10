@@ -24,7 +24,7 @@ object NetworkModule {
     fun provideApiKeyInterceptor(): Interceptor = Interceptor { chain ->
         val request = chain.request()
         val url = request.url.newBuilder()
-            .addQueryParameter("X-Api-Key", BuildConfig.API_KEY)
+            .addQueryParameter("apiKey", BuildConfig.API_KEY)
             .build()
         chain.proceed(request.newBuilder().url(url).build())
     }
@@ -53,7 +53,7 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideJson(): Json = Json {
-        ignoreUnknownKeys
+        ignoreUnknownKeys = false
     }
 
     @Provides
