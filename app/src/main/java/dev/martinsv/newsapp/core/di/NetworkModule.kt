@@ -6,8 +6,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.martinsv.newsapp.BuildConfig
 import kotlinx.serialization.json.Json
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Singleton
 
@@ -20,21 +18,11 @@ object NetworkModule {
     fun provideLoggingInterceptor(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply {
             level = if (BuildConfig.DEBUG) {
-                HttpLoggingInterceptor.Level.BASIC
+                HttpLoggingInterceptor.Level.BODY
             } else {
                 HttpLoggingInterceptor.Level.NONE
             }
         }
-
-    @Provides
-    @Singleton
-    fun provideOkHttpClient(
-        @ApiKeyInterceptor apiKeyInterceptor: Interceptor,
-        loggingInterceptor: HttpLoggingInterceptor
-    ): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(apiKeyInterceptor)
-        .addInterceptor(loggingInterceptor)
-        .build()
 
     @Provides
     @Singleton
