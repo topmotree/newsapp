@@ -10,7 +10,6 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class RetrofitNewsRepository @Inject constructor(
     private val newsApiService: NewsApiService,
     private val newsPageMapper: NewsPageMapper,
@@ -18,10 +17,11 @@ class RetrofitNewsRepository @Inject constructor(
 ) : NewsRepository {
 
     override suspend fun getTopHeadlines(
-        country: NewsCountry,
         page: Int,
         pageSize: Int,
+        country: NewsCountry,
     ): Result<NewsPage> = withContext(dispatcherProvider.io) {
+        //TODO add app logger and correctly handle Cancellation exception
         runCatching {
             val newsResponse = newsApiService.getTopHeadlines(
                 country = country.countryCode,

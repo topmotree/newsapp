@@ -2,9 +2,12 @@ package dev.martinsv.newsapp.news.data.mapper
 
 import dev.martinsv.newsapp.news.data.model.ArticleDto
 import dev.martinsv.newsapp.news.domain.Article
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.time.Instant
 
-class ArticleMapper {
+@Singleton
+class ArticleMapper @Inject constructor() {
 
     fun toDomain(dto: ArticleDto): Article =
         Article(
