@@ -8,7 +8,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlin.reflect.typeOf
 
-//TODO add comment why i decided to pass uiModel but not id or url.
+// This carries the full ArticleUiModel, not just an id or url. NewsAPI has no endpoint to
+// look up one article by id or url, and the app does not cache articles. So there is no way
+// to load the article again on the detail screen. It must arrive with the full data.
 @Serializable
 data class ArticleDetailArgument(
     val article: ArticleUiModel,

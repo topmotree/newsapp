@@ -1,6 +1,5 @@
 package dev.martinsv.newsapp.news.domain
 
-//TODO is it good place for this const?
 const val DEFAULT_PAGE_SIZE = 20
 
 interface NewsRepository {
