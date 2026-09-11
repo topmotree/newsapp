@@ -23,21 +23,29 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.martinsv.newsapp.core.presentation.icons.IconError
+import dev.martinsv.newsapp.core.presentation.utils.ObserveAsEvents
+import dev.martinsv.newsapp.core.presentation.utils.hs
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListItem
 import dev.martinsv.newsapp.news.presentation.model.ArticleListUiState
 import dev.martinsv.newsapp.news.presentation.model.ArticleUiModel
-import dev.martinsv.newsapp.core.presentation.utils.hs
 
 @Composable
 fun ArticleListScreen(
     viewModel: ArticleListViewModel = hiltViewModel(),
-    onArticleClick: (ArticleUiModel) -> Unit
+    openArticleDetail: (ArticleUiModel) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+    ObserveAsEvents(viewModel.events) {
+        when (it) {
+            is ArticleListEvent.OpenArticle ->
+                openArticleDetail(it.article)
+        }
+    }
+
     ArticleListContent(
         state = state,
-        onArticleClick = onArticleClick,
+        onArticleClick = viewModel::onArticleClick,
     )
 }
 
@@ -45,14 +53,16 @@ fun ArticleListScreen(
 @Composable
 fun ArticleListContent(
     state: ArticleListUiState,
-    onArticleClick: (ArticleUiModel) -> Unit
+    onArticleClick: (ArticleUiModel) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Scaffold(
         topBar = {
             TopAppBar(title = {
                 Text(hs("News"))
             })
-        }
+        },
+        modifier = modifier,
     ) { scaffoldPadding ->
 
         when (state) {

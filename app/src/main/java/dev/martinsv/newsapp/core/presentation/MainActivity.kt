@@ -4,9 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import dev.martinsv.newsapp.core.presentation.navigation.AppNavHost
 import dev.martinsv.newsapp.core.presentation.theme.NewsappTheme
-import dev.martinsv.newsapp.news.presentation.list.ArticleListScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -15,11 +16,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NewsappTheme {
-                ArticleListScreen(
-                    onArticleClick = {
-                        //TODO implement
-                    }
-                )
+                val navController = rememberNavController()
+
+                AppNavHost(navController)
             }
         }
     }

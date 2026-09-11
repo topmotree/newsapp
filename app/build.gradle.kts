@@ -93,6 +93,7 @@ dependencies {
 
     //UI
     implementation(libs.coil)
+    implementation(libs.browser)
 
     //testing
     testImplementation(libs.mockwebserver)

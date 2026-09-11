@@ -9,10 +9,12 @@ import dev.martinsv.newsapp.news.domain.NewsRepository
 import dev.martinsv.newsapp.news.presentation.mapper.ArticleUiMapper
 import dev.martinsv.newsapp.news.presentation.model.ArticleListUiState
 import dev.martinsv.newsapp.news.presentation.model.ArticleUiModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -43,6 +45,8 @@ class ArticleListViewModel @Inject constructor(
             initialValue = ArticleListUiState.Loading,
         )
 
+    private val eventChannel = Channel<ArticleListEvent>()
+    val events = eventChannel.receiveAsFlow()
 
     private fun fetchArticles() {
         viewModelScope.launch {
@@ -57,6 +61,10 @@ class ArticleListViewModel @Inject constructor(
                     _state.update { ArticleListUiState.Error("Error occurred") }
                 }
         }
+    }
+
+    fun onArticleClick(article: ArticleUiModel) {
+        viewModelScope.launch { eventChannel.send(ArticleListEvent.OpenArticle(article)) }
     }
 
     private suspend fun mapToUiModel(articles: List<Article>): List<ArticleUiModel> =
