@@ -1,7 +1,7 @@
 package dev.martinsv.newsapp.news.data.repository
 
-import android.util.Log
 import dev.martinsv.newsapp.core.utils.DispatcherProvider
+import dev.martinsv.newsapp.core.utils.logger.AppLogger
 import dev.martinsv.newsapp.news.data.NewsApiService
 import dev.martinsv.newsapp.news.data.mapper.NewsPageMapper
 import dev.martinsv.newsapp.news.domain.NewsCountry
@@ -16,6 +16,7 @@ class RetrofitNewsRepository @Inject constructor(
     private val newsApiService: NewsApiService,
     private val newsPageMapper: NewsPageMapper,
     private val dispatcher: DispatcherProvider,
+    private val logger: AppLogger,
 ) : NewsRepository {
 
     override suspend fun getTopHeadlines(
@@ -33,8 +34,7 @@ class RetrofitNewsRepository @Inject constructor(
             Result.success(newsPageMapper.toDomain(newsResponse))
         } catch (e: Exception) {
             currentCoroutineContext().ensureActive()
-            //TODO add app logger
-            Log.e("RetrofitNewsRepository", "Top headlines error", e)
+            logger.e(tag = "RetrofitNewsRepository", error = e) { "Top headlines error" }
             Result.failure(e)
         }
     }
