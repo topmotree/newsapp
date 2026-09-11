@@ -57,8 +57,7 @@ class ArticleListViewModel @Inject constructor(
                     _state.update { ArticleListUiState.Success(mapToUiModel(data.articles)) }
                 }
                 .onFailure {
-                    //TODO consider adding different error messages by exception type
-                    _state.update { ArticleListUiState.Error("Error occurred") }
+                    _state.update { ArticleListUiState.Error }
                 }
         }
     }
