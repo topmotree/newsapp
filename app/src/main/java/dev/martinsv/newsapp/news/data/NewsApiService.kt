@@ -1,6 +1,6 @@
-package dev.martinsv.newsapp.core.data.network
+package dev.martinsv.newsapp.news.data
 
-import dev.martinsv.newsapp.core.data.network.model.NewsResponseDto
+import dev.martinsv.newsapp.news.data.model.NewsResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 

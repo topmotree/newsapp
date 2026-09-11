@@ -1,4 +1,4 @@
-package dev.martinsv.newsapp.core.data.network.model
+package dev.martinsv.newsapp.news.data.model
 
 import kotlinx.serialization.Serializable
 
