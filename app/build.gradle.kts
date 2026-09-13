@@ -97,6 +97,7 @@ dependencies {
     implementation(libs.browser)
     implementation(libs.paging.common)
     implementation(libs.paging.compose)
+    implementation(libs.shimmer)
 
     //testing
     testImplementation(libs.mockwebserver)

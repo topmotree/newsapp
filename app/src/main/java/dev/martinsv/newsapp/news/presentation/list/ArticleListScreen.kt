@@ -24,6 +24,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -40,6 +41,7 @@ import dev.martinsv.newsapp.core.presentation.icons.IconSearchOff
 import dev.martinsv.newsapp.core.presentation.utils.ObserveAsEvents
 import dev.martinsv.newsapp.core.presentation.utils.hs
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListItem
+import dev.martinsv.newsapp.news.presentation.list.components.ArticleListLoadingItem
 import dev.martinsv.newsapp.news.presentation.list.paging.NewsType
 import dev.martinsv.newsapp.news.presentation.model.ArticleUiModel
 import kotlinx.coroutines.flow.Flow
@@ -115,7 +117,9 @@ fun ArticleListContent(
                                 contentDescription = null
                             )
                         }
-                    }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors()
+                        .copy(containerColor = MaterialTheme.colorScheme.background),
                 )
 
                 AnimatedVisibility(isSearchBarVisible) {
@@ -132,7 +136,7 @@ fun ArticleListContent(
             }
         },
         modifier = modifier,
-        containerColor = Color.White,
+        containerColor = MaterialTheme.colorScheme.background,
         contentWindowInsets = WindowInsets()
     ) { scaffoldPadding ->
 
@@ -153,16 +157,10 @@ fun ArticleListContent(
                         onClick = { onArticleClick(article) }
                     )
                 } else {
-                    //TODO redesign and add shimmer effect
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(300.dp)
-                            .background(MaterialTheme.colorScheme.surface)
-                    )
+                    ArticleListLoadingItem()
                 }
 
-                if (index != articlesPagingItems.itemCount) {
+                if (index != articlesPagingItems.itemCount - 1) {
                     HorizontalDivider(color = Color.LightGray)
                 }
             }

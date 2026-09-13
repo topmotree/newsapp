@@ -16,6 +16,7 @@ private val DarkColorScheme = darkColorScheme(
     secondary = PurpleGrey80,
     tertiary = Pink80,
     outline = Color(0xffE6E0E9),
+    background = Color.Black,
 )
 
 private val LightColorScheme = lightColorScheme(
