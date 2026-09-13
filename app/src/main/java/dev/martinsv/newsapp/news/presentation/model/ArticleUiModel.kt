@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ArticleUiModel(
+    val sourceName: String?,
     val author: String?,
     val title: String?,
     val description: String?,

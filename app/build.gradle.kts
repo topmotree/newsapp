@@ -93,6 +93,7 @@ dependencies {
 
     //UI
     implementation(libs.coil)
+    implementation(libs.coil.network.okhttp)
     implementation(libs.browser)
     implementation(libs.paging.common)
     implementation(libs.paging.compose)

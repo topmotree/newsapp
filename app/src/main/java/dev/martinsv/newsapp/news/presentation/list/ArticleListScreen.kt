@@ -2,7 +2,6 @@ package dev.martinsv.newsapp.news.presentation.list
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,8 +12,10 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -127,12 +128,12 @@ fun ArticleListContent(
             }
         },
         modifier = modifier,
+        containerColor = Color.White,
     ) { scaffoldPadding ->
 
         //TODO handle paging loading and error states
         LazyColumn(
             modifier = Modifier.padding(scaffoldPadding),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
             state = articlesListState,
         ) {
             items(
@@ -152,8 +153,12 @@ fun ArticleListContent(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(300.dp)
-                            .background(Color.Gray)
+                            .background(MaterialTheme.colorScheme.surface)
                     )
+                }
+
+                if (index != articlesPagingItems.itemCount) {
+                    HorizontalDivider(color = Color.LightGray)
                 }
             }
         }

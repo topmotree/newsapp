@@ -11,6 +11,7 @@ class ArticleUiMapper @Inject constructor(private val formatter: InstantFormatte
 
     fun toUiModel(article: Article): ArticleUiModel {
         return ArticleUiModel(
+            sourceName = article.sourceName,
             author = article.author,
             title = article.title,
             description = article.description,
