@@ -4,7 +4,6 @@ import dev.martinsv.newsapp.core.utils.DispatcherProvider
 import dev.martinsv.newsapp.core.utils.logger.AppLogger
 import dev.martinsv.newsapp.news.data.NewsApiService
 import dev.martinsv.newsapp.news.data.mapper.NewsPageMapper
-import dev.martinsv.newsapp.news.domain.NewsCountry
 import dev.martinsv.newsapp.news.domain.NewsPage
 import dev.martinsv.newsapp.news.domain.NewsRepository
 import kotlinx.coroutines.ensureActive
@@ -42,11 +41,11 @@ class RetrofitNewsRepository @Inject constructor(
     override suspend fun getTopHeadlines(
         page: Int,
         pageSize: Int,
-        country: NewsCountry,
+        country: String,
     ): Result<NewsPage> = withContext(dispatcher.io) {
         try {
             val response = newsApiService.getTopHeadlines(
-                country = country.countryCode,
+                country = country,
                 page = page,
                 pageSize = pageSize,
             )
