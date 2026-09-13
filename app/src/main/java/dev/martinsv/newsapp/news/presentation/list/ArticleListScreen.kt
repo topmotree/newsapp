@@ -4,9 +4,13 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -129,6 +133,7 @@ fun ArticleListContent(
         },
         modifier = modifier,
         containerColor = Color.White,
+        contentWindowInsets = WindowInsets()
     ) { scaffoldPadding ->
 
         //TODO handle paging loading and error states
@@ -160,6 +165,14 @@ fun ArticleListContent(
                 if (index != articlesPagingItems.itemCount) {
                     HorizontalDivider(color = Color.LightGray)
                 }
+            }
+
+            item("bottom_spacer") {
+                Spacer(
+                    Modifier.windowInsetsBottomHeight(
+                        WindowInsets.systemBars
+                    )
+                )
             }
         }
     }
