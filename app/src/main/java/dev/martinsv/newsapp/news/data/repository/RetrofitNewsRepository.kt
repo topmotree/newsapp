@@ -7,7 +7,6 @@ import dev.martinsv.newsapp.news.data.mapper.NewsPageMapper
 import dev.martinsv.newsapp.news.domain.NewsCountry
 import dev.martinsv.newsapp.news.domain.NewsPage
 import dev.martinsv.newsapp.news.domain.NewsRepository
-import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -19,21 +18,42 @@ class RetrofitNewsRepository @Inject constructor(
     private val logger: AppLogger,
 ) : NewsRepository {
 
+    override suspend fun getEverything(
+        query: String,
+        page: Int,
+        pageSize: Int,
+        language: String
+    ): Result<NewsPage> = withContext(dispatcher.io) {
+        try {
+            val response = newsApiService.getEverything(
+                query = query,
+                page = page,
+                pageSize = pageSize,
+                language = language
+            )
+            Result.success(newsPageMapper.toDomain(response))
+        } catch (e: Exception) {
+            ensureActive()
+            logger.e(tag = "RetrofitNewsRepository", error = e) { "Everything error" }
+            Result.failure(e)
+        }
+    }
+
     override suspend fun getTopHeadlines(
         page: Int,
         pageSize: Int,
         country: NewsCountry,
     ): Result<NewsPage> = withContext(dispatcher.io) {
         try {
-            val newsResponse = newsApiService.getTopHeadlines(
+            val response = newsApiService.getTopHeadlines(
                 country = country.countryCode,
                 page = page,
                 pageSize = pageSize,
             )
 
-            Result.success(newsPageMapper.toDomain(newsResponse))
+            Result.success(newsPageMapper.toDomain(response))
         } catch (e: Exception) {
-            currentCoroutineContext().ensureActive()
+            ensureActive()
             logger.e(tag = "RetrofitNewsRepository", error = e) { "Top headlines error" }
             Result.failure(e)
         }

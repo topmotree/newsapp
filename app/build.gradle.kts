@@ -94,6 +94,8 @@ dependencies {
     //UI
     implementation(libs.coil)
     implementation(libs.browser)
+    implementation(libs.paging.common)
+    implementation(libs.paging.compose)
 
     //testing
     testImplementation(libs.mockwebserver)

@@ -19,6 +19,7 @@ navigationCompose = "2.10.1"
 hiltNavigationCompose = "1.4.0"
 coil = "3.6.2"
 browser = "1.10.0"
+paging = "3.5.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -64,6 +65,8 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 #UI
 coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 browser = { module = "androidx.browser:browser", version.ref = "browser" }
+paging-common = { module = "androidx.paging:paging-common", version.ref = "paging" }
+paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
