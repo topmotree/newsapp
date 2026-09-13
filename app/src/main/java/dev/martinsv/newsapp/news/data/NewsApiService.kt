@@ -5,7 +5,16 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NewsApiService {
-    //TODO add kdoc
+    
+    /**
+     * Search through millions of articles from over 150,000 large and small news sources and blogs.
+     *
+     * @param query Keywords or phrases to search for in the article title and body.
+     * @param language The 2-letter ISO-639-1 code of the language you want to get headlines for.
+     * @param pageSize The number of results to return per page.
+     * @param page The page number to fetch
+     *
+     * */
     @GET("v2/everything")
     suspend fun getEverything(
         @Query("q") query: String,
