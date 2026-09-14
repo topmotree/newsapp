@@ -89,9 +89,7 @@ fun ArticleDetailContent(
         },
         modifier = modifier,
     ) { paddingValues ->
-        LazyColumn(
-            contentPadding = paddingValues
-        ) {
+        LazyColumn(contentPadding = paddingValues) {
             if (article.urlToImage != null) {
                 item("article_image") {
                     AsyncImage(
@@ -186,6 +184,7 @@ fun ArticleDetailContent(
                     OpenArticleBlock(
                         article = article,
                         onReadFullArticleClick = onReadFullArticleClick,
+                        modifier = Modifier.padding(bottom = 16.dp)
                     )
                 }
             }
@@ -197,8 +196,9 @@ fun ArticleDetailContent(
 private fun OpenArticleBlock(
     article: ArticleUiModel,
     onReadFullArticleClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    Column {
+    Column(modifier) {
         Button(
             onClick = {
                 onReadFullArticleClick()

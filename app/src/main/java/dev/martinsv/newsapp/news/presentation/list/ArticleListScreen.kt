@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
@@ -126,13 +127,14 @@ fun ArticleListContent(
                         .padding(16.dp),
                 )
             } else {
-                //TODO test keyboard insets on real device. Probably required imaPadding
                 LazyColumn(
-                    modifier = Modifier.padding(scaffoldPadding),
+                    modifier = Modifier
+                        .padding(scaffoldPadding)
+                        .imePadding(),
                     state = articlesListState,
                     contentPadding = WindowInsets.systemBars
                         .only(WindowInsetsSides.Bottom)
-                        .asPaddingValues()
+                        .asPaddingValues(),
                 ) {
                     if (articlesPagingItems.loadState.refresh is LoadState.Loading) {
                         items(6) {
