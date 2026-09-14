@@ -14,14 +14,12 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -31,6 +29,7 @@ import androidx.paging.PagingData
 import androidx.paging.PagingData.Companion.from
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
+import dev.martinsv.newsapp.core.presentation.components.AppHorizontalDivider
 import dev.martinsv.newsapp.core.presentation.theme.NewsappTheme
 import dev.martinsv.newsapp.core.presentation.utils.ObserveAsEvents
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListItem
@@ -139,7 +138,7 @@ fun ArticleListContent(
                         items(6) {
                             ArticleListLoadingItem()
 
-                            HorizontalDivider(color = Color.LightGray)
+                            AppHorizontalDivider()
                         }
                     }
 
@@ -158,7 +157,7 @@ fun ArticleListContent(
                             ArticleListLoadingItem()
                         }
 
-                        HorizontalDivider(color = Color.LightGray)
+                        AppHorizontalDivider()
                     }
 
                     item("pagination_footer") {

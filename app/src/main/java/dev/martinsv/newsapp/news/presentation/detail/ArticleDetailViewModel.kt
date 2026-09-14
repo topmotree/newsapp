@@ -27,4 +27,8 @@ class ArticleDetailViewModel @Inject constructor(
         val url = article.url ?: return
         viewModelScope.launch { eventChannel.send(ArticleDetailEvent.OpenUrl(url)) }
     }
+
+    fun onBackNavigationClick() {
+        viewModelScope.launch { eventChannel.send(ArticleDetailEvent.OnBack) }
+    }
 }

@@ -29,7 +29,11 @@ fun AppNavHost(
         }
 
         composable<ArticleDetailRoute>(typeMap = articleDetailTypeMap) {
-            ArticleDetailScreen()
+            ArticleDetailScreen(
+                onBackClick = {
+                    navController.navigateUp()
+                }
+            )
         }
     }
 }
