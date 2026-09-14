@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -67,9 +68,17 @@ fun ArticleListTopBar(
                 placeholder = {
                     Text(hs("Search news"))
                 },
+                leadingIcon = {
+                    Icon(
+                        imageVector = IconSearch,
+                        contentDescription = hs("Search icon")
+                    )
+                },
+                shape = RoundedCornerShape(32.dp),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
+                    .padding(bottom = 8.dp)
             )
         }
     }
