@@ -1,13 +1,10 @@
 package dev.martinsv.newsapp.news.presentation.list
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
@@ -17,14 +14,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -37,12 +28,10 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
-import dev.martinsv.newsapp.core.presentation.icons.IconSearch
-import dev.martinsv.newsapp.core.presentation.icons.IconSearchOff
 import dev.martinsv.newsapp.core.presentation.utils.ObserveAsEvents
-import dev.martinsv.newsapp.core.presentation.utils.hs
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListItem
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListLoadingItem
+import dev.martinsv.newsapp.news.presentation.list.components.ArticleListTopBar
 import dev.martinsv.newsapp.news.presentation.list.components.PaginationError
 import dev.martinsv.newsapp.news.presentation.list.components.PaginationLoading
 import dev.martinsv.newsapp.news.presentation.list.components.RefreshError
@@ -100,45 +89,12 @@ fun ArticleListContent(
 
     Scaffold(
         topBar = {
-            //TODO move to the separate component
-            Column {
-                TopAppBar(
-                    title = {
-                        Text(
-                            if (newsType == NewsType.TopHeadlines) {
-                                hs("Top headlines")
-                            } else {
-                                hs("Search")
-                            }
-
-                        )
-                    },
-                    actions = {
-                        IconButton(
-                            onClick = onSearchIconClick
-                        ) {
-                            Icon(
-                                imageVector = if (isSearchBarVisible) IconSearchOff else IconSearch,
-                                contentDescription = null
-                            )
-                        }
-                    },
-                    colors = TopAppBarDefaults.topAppBarColors()
-                        .copy(containerColor = MaterialTheme.colorScheme.background),
-                )
-
-                AnimatedVisibility(isSearchBarVisible) {
-                    OutlinedTextField(
-                        state = searchFieldState,
-                        placeholder = {
-                            Text(hs("Search news"))
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                    )
-                }
-            }
+            ArticleListTopBar(
+                newsType = newsType,
+                onSearchIconClick = onSearchIconClick,
+                isSearchBarVisible = isSearchBarVisible,
+                searchFieldState = searchFieldState
+            )
         },
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.background,
