@@ -33,6 +33,7 @@ import dev.martinsv.newsapp.news.presentation.list.components.ArticleListItem
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListLoadingItem
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListTopBar
 import dev.martinsv.newsapp.news.presentation.list.components.NothingFoundHint
+import dev.martinsv.newsapp.news.presentation.list.components.PaginationEndReached
 import dev.martinsv.newsapp.news.presentation.list.components.PaginationError
 import dev.martinsv.newsapp.news.presentation.list.components.PaginationLoading
 import dev.martinsv.newsapp.news.presentation.list.components.RefreshError
@@ -131,6 +132,8 @@ fun ArticleListContent(
                     if (articlesPagingItems.loadState.refresh is LoadState.Loading) {
                         items(6) {
                             ArticleListLoadingItem()
+
+                            HorizontalDivider(color = Color.LightGray)
                         }
                     }
 
@@ -149,23 +152,27 @@ fun ArticleListContent(
                             ArticleListLoadingItem()
                         }
 
-                        if (index != articlesPagingItems.itemCount - 1) {
-                            HorizontalDivider(color = Color.LightGray)
-                        }
+                        HorizontalDivider(color = Color.LightGray)
                     }
 
                     item("pagination_footer") {
                         val appendState = articlesPagingItems.loadState.append
 
-                        if (appendState is LoadState.Loading) {
-                            PaginationLoading(
-                                modifier = Modifier.padding(16.dp)
-                            )
-                        } else if (appendState is LoadState.Error) {
-                            PaginationError(
-                                onRetry = { articlesPagingItems.retry() },
-                                modifier = Modifier.padding(16.dp)
-                            )
+                        when {
+                            appendState is LoadState.Loading ->
+                                PaginationLoading(
+                                    modifier = Modifier.padding(16.dp)
+                                )
+                            appendState is LoadState.Error ->
+                                PaginationError(
+                                    onRetry = { articlesPagingItems.retry() },
+                                    modifier = Modifier.padding(16.dp)
+                                )
+                            appendState.endOfPaginationReached ->
+                                PaginationEndReached(
+                                    modifier = Modifier.padding(16.dp),
+
+                                )
                         }
                     }
                 }
