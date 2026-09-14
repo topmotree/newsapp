@@ -17,6 +17,8 @@ private val DarkColorScheme = darkColorScheme(
     tertiary = Pink80,
     outline = Color(0xffE6E0E9),
     background = Color.Black,
+    errorContainer = Color(0xFF8C1D18),
+    onErrorContainer = Color(0xFFF9DEDC)
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -25,7 +27,10 @@ private val LightColorScheme = lightColorScheme(
     tertiary = Pink40,
     outline = Color.LightGray,
     background = Color.White,
-    onBackground = Color.Black
+    onBackground = Color.Black,
+    error = Color(0xFFB3261E),
+    errorContainer = Color(0xFFF9DEDC),
+    onErrorContainer = Color(0xffB3261E)
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

@@ -43,6 +43,8 @@ import dev.martinsv.newsapp.core.presentation.utils.ObserveAsEvents
 import dev.martinsv.newsapp.core.presentation.utils.hs
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListItem
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListLoadingItem
+import dev.martinsv.newsapp.news.presentation.list.components.PaginationError
+import dev.martinsv.newsapp.news.presentation.list.components.PaginationLoading
 import dev.martinsv.newsapp.news.presentation.list.components.RefreshError
 import dev.martinsv.newsapp.news.presentation.list.paging.NewsType
 import dev.martinsv.newsapp.news.presentation.model.ArticleUiModel
@@ -98,6 +100,7 @@ fun ArticleListContent(
 
     Scaffold(
         topBar = {
+            //TODO move to the separate component
             Column {
                 TopAppBar(
                     title = {
@@ -142,7 +145,6 @@ fun ArticleListContent(
         contentWindowInsets = WindowInsets()
     ) { scaffoldPadding ->
 
-        //TODO handle paging loading and error states
         Box {
             if (articlesPagingItems.loadState.refresh is LoadState.Error) {
                 RefreshError(
@@ -183,6 +185,21 @@ fun ArticleListContent(
 
                         if (index != articlesPagingItems.itemCount - 1) {
                             HorizontalDivider(color = Color.LightGray)
+                        }
+                    }
+
+                    item("pagination_footer") {
+                        val appendState = articlesPagingItems.loadState.append
+
+                        if (appendState is LoadState.Loading) {
+                            PaginationLoading(
+                                modifier = Modifier.padding(16.dp)
+                            )
+                        } else if (appendState is LoadState.Error) {
+                            PaginationError(
+                                onRetry = { articlesPagingItems.retry() },
+                                modifier = Modifier.padding(16.dp)
+                            )
                         }
                     }
                 }
