@@ -36,6 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
@@ -146,11 +147,17 @@ fun ArticleListContent(
         //TODO handle paging loading and error states
         LazyColumn(
             modifier = Modifier.padding(scaffoldPadding),
-            state = articlesListState,
+            state      = articlesListState,
             contentPadding = WindowInsets.systemBars
                 .only(WindowInsetsSides.Bottom)
                 .asPaddingValues()
         ) {
+            if (articlesPagingItems.loadState.refresh is LoadState.Loading) {
+                items(6) {
+                    ArticleListLoadingItem()
+                }
+            }
+
             items(
                 articlesPagingItems.itemCount,
                 key = articlesPagingItems.itemKey { it.url ?: it.toString() }
