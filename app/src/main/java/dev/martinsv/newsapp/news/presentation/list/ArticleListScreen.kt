@@ -1,19 +1,16 @@
 package dev.martinsv.newsapp.news.presentation.list
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -46,6 +43,7 @@ import dev.martinsv.newsapp.core.presentation.utils.ObserveAsEvents
 import dev.martinsv.newsapp.core.presentation.utils.hs
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListItem
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListLoadingItem
+import dev.martinsv.newsapp.news.presentation.list.components.RefreshError
 import dev.martinsv.newsapp.news.presentation.list.paging.NewsType
 import dev.martinsv.newsapp.news.presentation.model.ArticleUiModel
 import kotlinx.coroutines.flow.Flow
@@ -145,36 +143,48 @@ fun ArticleListContent(
     ) { scaffoldPadding ->
 
         //TODO handle paging loading and error states
-        LazyColumn(
-            modifier = Modifier.padding(scaffoldPadding),
-            state      = articlesListState,
-            contentPadding = WindowInsets.systemBars
-                .only(WindowInsetsSides.Bottom)
-                .asPaddingValues()
-        ) {
-            if (articlesPagingItems.loadState.refresh is LoadState.Loading) {
-                items(6) {
-                    ArticleListLoadingItem()
-                }
-            }
+        Box {
+            if (articlesPagingItems.loadState.refresh is LoadState.Error) {
+                RefreshError(
+                    onRetry = { articlesPagingItems.retry() },
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(scaffoldPadding)
+                        .padding(16.dp),
+                )
+            } else {
+                LazyColumn(
+                    modifier = Modifier.padding(scaffoldPadding),
+                    state = articlesListState,
+                    contentPadding = WindowInsets.systemBars
+                        .only(WindowInsetsSides.Bottom)
+                        .asPaddingValues()
+                ) {
+                    if (articlesPagingItems.loadState.refresh is LoadState.Loading) {
+                        items(6) {
+                            ArticleListLoadingItem()
+                        }
+                    }
 
-            items(
-                articlesPagingItems.itemCount,
-                key = articlesPagingItems.itemKey { it.url ?: it.toString() }
-            ) { index ->
-                val article = articlesPagingItems[index]
+                    items(
+                        articlesPagingItems.itemCount,
+                        key = articlesPagingItems.itemKey { it.url ?: it.toString() }
+                    ) { index ->
+                        val article = articlesPagingItems[index]
 
-                if (article != null) {
-                    ArticleListItem(
-                        article = article,
-                        onClick = { onArticleClick(article) }
-                    )
-                } else {
-                    ArticleListLoadingItem()
-                }
+                        if (article != null) {
+                            ArticleListItem(
+                                article = article,
+                                onClick = { onArticleClick(article) }
+                            )
+                        } else {
+                            ArticleListLoadingItem()
+                        }
 
-                if (index != articlesPagingItems.itemCount - 1) {
-                    HorizontalDivider(color = Color.LightGray)
+                        if (index != articlesPagingItems.itemCount - 1) {
+                            HorizontalDivider(color = Color.LightGray)
+                        }
+                    }
                 }
             }
         }
