@@ -18,13 +18,14 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.martinsv.newsapp.R
 import dev.martinsv.newsapp.core.presentation.icons.IconClose
 import dev.martinsv.newsapp.core.presentation.icons.IconSearch
 import dev.martinsv.newsapp.core.presentation.icons.IconSearchOff
 import dev.martinsv.newsapp.core.presentation.theme.NewsappTheme
-import dev.martinsv.newsapp.core.presentation.utils.hs
 import dev.martinsv.newsapp.news.presentation.list.paging.NewsType
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,9 +44,9 @@ fun ArticleListTopBar(
             title = {
                 Text(
                     if (newsType == NewsType.TopHeadlines) {
-                        hs("Top headlines")
+                        stringResource(R.string.article_list_top_bar_title_top_headlines)
                     } else {
-                        hs("Search")
+                        stringResource(R.string.article_list_top_bar_title_search)
                     }
 
                 )
@@ -65,15 +66,16 @@ fun ArticleListTopBar(
         )
 
         AnimatedVisibility(isSearchBarVisible) {
+            //TODO set max lines to 1
             OutlinedTextField(
                 state = searchFieldState,
                 placeholder = {
-                    Text(hs("Search news"))
+                    Text(stringResource(R.string.article_list_search_textfield_placeholder))
                 },
                 leadingIcon = {
                     Icon(
                         imageVector = IconSearch,
-                        contentDescription = hs("Search icon")
+                        contentDescription = null,
                     )
                 },
                 trailingIcon = {
@@ -82,7 +84,7 @@ fun ArticleListTopBar(
                     ) {
                         Icon(
                             imageVector = IconClose,
-                            contentDescription = hs("Clear search query"),
+                            contentDescription = stringResource(R.string.article_list_search_textfield_clear_button_description),
                         )
                     }
                 },

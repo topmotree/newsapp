@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import dev.martinsv.newsapp.R
 import dev.martinsv.newsapp.core.presentation.theme.NewsappTheme
-import dev.martinsv.newsapp.core.presentation.utils.hs
 import dev.martinsv.newsapp.core.utils.logger.logger
 import dev.martinsv.newsapp.news.presentation.model.ArticleUiModel
 import dev.martinsv.newsapp.news.presentation.utils.PreviewData
@@ -48,7 +48,7 @@ fun ArticleListItem(
                 model = article.urlToImage,
                 placeholder = painterResource(R.drawable.image_placeholder),
                 error = painterResource(R.drawable.image_placeholder),
-                contentDescription = hs("Article image"),
+                contentDescription = stringResource(R.string.article_image_content_description),
                 contentScale = ContentScale.Crop,
                 onError = {
                     logger.d { "Image loading Error. Result: ${it.result}" }

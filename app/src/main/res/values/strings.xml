@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">newsapp</string>
+    <string name="go_to_previous_screen">Go to previous screen</string>
+    <string name="article_image_content_description">Article image</string>
+    <string name="detail_read_full_article_button_label">Read full article</string>
+    <string name="article_detail_opens_in_your_browser_hint">Opens %1$s in your browser</string>
+    <string name="article_list_top_bar_title_top_headlines">Top headlines</string>
+    <string name="article_list_top_bar_title_search">Search</string>
+    <string name="article_list_search_textfield_placeholder">Search news</string>
+    <string name="article_list_search_textfield_clear_button_description">Clear search query</string>
+    <string name="article_list_no_articles_found_hint_title">No articles found</string>
+    <string name="article_list_nothing_matches_hint_message">Nothing matches: %1$s. Try different keyword.</string>
+    <string name="article_detail_no_more_articles_description">No more articles</string>
+    <string name="article_list_pagination_error_message">Couldn\'t load more articles</string>
+    <string name="global_retry_button_label">Retry</string>
+    <string name="article_list_refresh_error_title">Error occurred</string>
+    <string name="article_list_refresh_error_message">Check your connection or try again.</string>
 </resources>

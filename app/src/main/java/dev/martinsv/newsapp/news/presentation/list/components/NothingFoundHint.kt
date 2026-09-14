@@ -11,9 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import dev.martinsv.newsapp.R
 import dev.martinsv.newsapp.core.presentation.icons.IconSearch
-import dev.martinsv.newsapp.core.presentation.utils.hs
 
 @Composable
 fun NothingFoundHint(
@@ -28,14 +29,14 @@ fun NothingFoundHint(
         Icon(
             imageVector = IconSearch,
             tint = MaterialTheme.colorScheme.onBackground,
-            contentDescription = hs("Search icon"),
+            contentDescription = null,
             modifier = Modifier.size(32.dp)
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = hs("No articles found"),
+            text = stringResource(R.string.article_list_no_articles_found_hint_title),
             color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.titleSmall
         )
@@ -43,7 +44,7 @@ fun NothingFoundHint(
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = hs("Nothing matches: $searchQuery. Try different keyword."),
+            text = stringResource(R.string.article_list_nothing_matches_hint_message, searchQuery),
             color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.bodySmall
         )

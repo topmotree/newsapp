@@ -15,11 +15,12 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.martinsv.newsapp.R
 import dev.martinsv.newsapp.core.presentation.theme.NewsappTheme
-import dev.martinsv.newsapp.core.presentation.utils.hs
 
 @Composable
 fun PaginationError(
@@ -39,7 +40,7 @@ fun PaginationError(
                 .padding(vertical = 8.dp)
         ) {
             Text(
-                text = hs("Couldn't load more articles"),
+                text = stringResource(R.string.article_list_pagination_error_message),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.weight(1f)
@@ -52,7 +53,7 @@ fun PaginationError(
                 )
             ) {
                 Text(
-                    text = hs("Retry"),
+                    text = stringResource(R.string.global_retry_button_label),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                 )

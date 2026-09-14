@@ -13,11 +13,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.martinsv.newsapp.R
 import dev.martinsv.newsapp.core.presentation.icons.IconError
 import dev.martinsv.newsapp.core.presentation.theme.NewsappTheme
-import dev.martinsv.newsapp.core.presentation.utils.hs
 
 @Composable
 fun RefreshError(
@@ -32,14 +33,14 @@ fun RefreshError(
         Icon(
             imageVector = IconError,
             tint = MaterialTheme.colorScheme.error,
-            contentDescription = hs("Error icon"),
+            contentDescription = null,
             modifier = Modifier.size(32.dp)
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = hs("Error occurred"),
+            text = stringResource(R.string.article_list_refresh_error_title),
             color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.titleSmall
         )
@@ -47,7 +48,7 @@ fun RefreshError(
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = hs("Check your connection or try again."),
+            text = stringResource(R.string.article_list_refresh_error_message),
             color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.bodySmall
         )
@@ -55,7 +56,7 @@ fun RefreshError(
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = onRetry) {
-            Text(hs("Retry"))
+            Text(stringResource(R.string.global_retry_button_label))
         }
     }
 }

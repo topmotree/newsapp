@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,7 +34,6 @@ import dev.martinsv.newsapp.core.presentation.icons.IconArrowBack
 import dev.martinsv.newsapp.core.presentation.icons.IconOpenInNew
 import dev.martinsv.newsapp.core.presentation.theme.NewsappTheme
 import dev.martinsv.newsapp.core.presentation.utils.ObserveAsEvents
-import dev.martinsv.newsapp.core.presentation.utils.hs
 import dev.martinsv.newsapp.core.presentation.utils.openCustomTab
 import dev.martinsv.newsapp.core.utils.logger.logger
 import dev.martinsv.newsapp.news.presentation.model.ArticleUiModel
@@ -81,7 +81,7 @@ fun ArticleDetailContent(
                     ) {
                         Icon(
                             imageVector = IconArrowBack,
-                            contentDescription = hs("Go to previous screen")
+                            contentDescription = stringResource(R.string.go_to_previous_screen)
                         )
                     }
                 }
@@ -98,7 +98,7 @@ fun ArticleDetailContent(
                         model = article.urlToImage,
                         placeholder = painterResource(R.drawable.image_placeholder),
                         error = painterResource(R.drawable.image_placeholder),
-                        contentDescription = hs("Article image"),
+                        contentDescription = stringResource(R.string.article_image_content_description),
                         contentScale = ContentScale.Crop,
                         onError = {
                             logger.d { "Image loading Error. Result: ${it.result}" }
@@ -206,7 +206,7 @@ private fun OpenArticleBlock(
             modifier = Modifier.padding(horizontal = 16.dp)
         ) {
             Text(
-                text = hs("Read full article"),
+                text = stringResource(R.string.detail_read_full_article_button_label),
                 style = MaterialTheme.typography.bodyMedium,
             )
 
@@ -222,7 +222,10 @@ private fun OpenArticleBlock(
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = hs("Opens ${article.urlHost} in your browser"),
+            text = stringResource(
+                R.string.article_detail_opens_in_your_browser_hint,
+                article.urlHost
+            ),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.padding(horizontal = 16.dp),

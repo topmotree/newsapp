@@ -9,12 +9,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.martinsv.newsapp.R
 import dev.martinsv.newsapp.core.presentation.icons.IconCheckCircle
 import dev.martinsv.newsapp.core.presentation.theme.NewsappTheme
-import dev.martinsv.newsapp.core.presentation.utils.hs
 
 @Composable
 fun PaginationEndReached(
@@ -30,7 +31,7 @@ fun PaginationEndReached(
     ) {
         Icon(
             imageVector = IconCheckCircle,
-            contentDescription = hs("No more articles"),
+            contentDescription = stringResource(R.string.article_detail_no_more_articles_description),
             modifier = Modifier.size(iconSize),
             tint = MaterialTheme.colorScheme.outline,
         )
