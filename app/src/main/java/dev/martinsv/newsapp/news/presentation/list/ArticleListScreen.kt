@@ -32,6 +32,7 @@ import dev.martinsv.newsapp.core.presentation.utils.ObserveAsEvents
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListItem
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListLoadingItem
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListTopBar
+import dev.martinsv.newsapp.news.presentation.list.components.NothingFoundHint
 import dev.martinsv.newsapp.news.presentation.list.components.PaginationError
 import dev.martinsv.newsapp.news.presentation.list.components.PaginationLoading
 import dev.martinsv.newsapp.news.presentation.list.components.RefreshError
@@ -110,7 +111,16 @@ fun ArticleListContent(
                         .padding(scaffoldPadding)
                         .padding(16.dp),
                 )
+            } else if (searchFieldState.text.isNotBlank() && articlesPagingItems.itemCount == 0) {
+                NothingFoundHint(
+                    searchQuery = searchFieldState.text.toString(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(scaffoldPadding)
+                        .padding(16.dp),
+                )
             } else {
+                //TODO test keyboard insets on real device. Probably required imaPadding
                 LazyColumn(
                     modifier = Modifier.padding(scaffoldPadding),
                     state = articlesListState,
