@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.clearText
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.martinsv.newsapp.core.presentation.icons.IconClose
 import dev.martinsv.newsapp.core.presentation.icons.IconSearch
 import dev.martinsv.newsapp.core.presentation.icons.IconSearchOff
 import dev.martinsv.newsapp.core.presentation.theme.NewsappTheme
@@ -74,6 +76,16 @@ fun ArticleListTopBar(
                         contentDescription = hs("Search icon")
                     )
                 },
+                trailingIcon = {
+                    IconButton(
+                        onClick = { searchFieldState.clearText() }
+                    ) {
+                        Icon(
+                            imageVector = IconClose,
+                            contentDescription = hs("Clear search query"),
+                        )
+                    }
+                },
                 shape = RoundedCornerShape(32.dp),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -86,7 +98,7 @@ fun ArticleListTopBar(
 
 @Preview
 @Composable
-private fun ArticleListTopBarPreview(){
+private fun ArticleListTopBarPreview() {
     NewsappTheme {
         Column {
             ArticleListTopBar(
