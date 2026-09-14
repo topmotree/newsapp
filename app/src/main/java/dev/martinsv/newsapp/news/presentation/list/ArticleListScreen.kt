@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -21,13 +22,16 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.paging.PagingData.Companion.from
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
+import dev.martinsv.newsapp.core.presentation.theme.NewsappTheme
 import dev.martinsv.newsapp.core.presentation.utils.ObserveAsEvents
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListItem
 import dev.martinsv.newsapp.news.presentation.list.components.ArticleListLoadingItem
@@ -39,7 +43,9 @@ import dev.martinsv.newsapp.news.presentation.list.components.PaginationLoading
 import dev.martinsv.newsapp.news.presentation.list.components.RefreshError
 import dev.martinsv.newsapp.news.presentation.list.paging.NewsType
 import dev.martinsv.newsapp.news.presentation.model.ArticleUiModel
+import dev.martinsv.newsapp.news.presentation.utils.PreviewData
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 
 @Composable
@@ -163,20 +169,41 @@ fun ArticleListContent(
                                 PaginationLoading(
                                     modifier = Modifier.padding(16.dp)
                                 )
+
                             appendState is LoadState.Error ->
                                 PaginationError(
                                     onRetry = { articlesPagingItems.retry() },
                                     modifier = Modifier.padding(16.dp)
                                 )
+
                             appendState.endOfPaginationReached ->
                                 PaginationEndReached(
                                     modifier = Modifier.padding(16.dp),
-
                                 )
                         }
                     }
                 }
             }
         }
+    }
+}
+
+
+@Preview
+@Composable
+private fun ArticleListContentPreview() {
+    val articlePagingFlow =
+        MutableStateFlow(from(PreviewData.list))
+
+    NewsappTheme {
+        ArticleListContent(
+            articlePagingFlow = articlePagingFlow,
+            searchFieldState = rememberTextFieldState(),
+            onArticleClick = {},
+            articlesListState = rememberLazyListState(),
+            isSearchBarVisible = false,
+            onSearchIconClick = {},
+            newsType = NewsType.TopHeadlines,
+        )
     }
 }
