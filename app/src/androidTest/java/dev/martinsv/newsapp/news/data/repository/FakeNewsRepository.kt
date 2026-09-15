@@ -6,9 +6,11 @@ import dev.martinsv.newsapp.news.domain.NewsRepository
 
 class FakeNewsRepository(
     articlesCount: Int = 100,
-    private val error: Throwable? = null,
 ) : NewsRepository {
     private val articles: List<Article> = (1..articlesCount).map { createTestArticle(it) }
+
+    @Volatile
+    var error: Throwable? = null
 
     override suspend fun getEverything(
         query: String,
@@ -26,7 +28,7 @@ class FakeNewsRepository(
         getPage(page, pageSize)
 
     private fun getPage(page: Int, pageSize: Int): Result<NewsPage> {
-        if (error != null) return Result.failure(error)
+        error?.let { return Result.failure(it) }
         val items = articles.drop((page - 1) * pageSize).take(pageSize)
         return Result.success(NewsPage(items, totalResults = articles.size))
     }

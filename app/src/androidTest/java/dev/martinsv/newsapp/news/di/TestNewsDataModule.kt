@@ -15,7 +15,11 @@ import javax.inject.Singleton
 )
 object TestNewsDataModule {
 
+    // Tests inject this to control the data, for example to set an error
     @Provides
     @Singleton
-    fun provideNewsRepository(): NewsRepository = FakeNewsRepository()
+    fun provideFakeNewsRepository(): FakeNewsRepository = FakeNewsRepository()
+
+    @Provides
+    fun provideNewsRepository(fakeRepository: FakeNewsRepository): NewsRepository = fakeRepository
 }
