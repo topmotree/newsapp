@@ -6,15 +6,15 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.martinsv.newsapp.news.domain.DEFAULT_PAGE_SIZE
+import dev.martinsv.newsapp.news.domain.Article
 import dev.martinsv.newsapp.news.domain.NewsRepository
 import dev.martinsv.newsapp.news.presentation.list.paging.NewsPagingSource
 import dev.martinsv.newsapp.news.presentation.list.paging.NewsType
+import dev.martinsv.newsapp.news.presentation.list.paging.defaultPagingConfig
 import dev.martinsv.newsapp.news.presentation.mapper.ArticleUiMapper
 import dev.martinsv.newsapp.news.presentation.model.ArticleUiModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -59,18 +59,7 @@ class ArticleListViewModel @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val articlePagingFlow: Flow<PagingData<ArticleUiModel>> = newsType.flatMapLatest {
-        Pager(
-            config = PagingConfig(
-                pageSize = DEFAULT_PAGE_SIZE,
-                enablePlaceholders = true,
-            ),
-            pagingSourceFactory = {
-                NewsPagingSource(
-                    newsRepository = newsRepository,
-                    newsType = it,
-                )
-            }
-        ).flow
+        createDefaultPager(it).flow
     }
         .map { pagingData ->
             pagingData.map { articleUiMapper.toUiModel(it) }
@@ -88,5 +77,17 @@ class ArticleListViewModel @Inject constructor(
         val isVisible = _isSearchBarVisible.value
         searchFieldState.clearText()
         _isSearchBarVisible.update { !isVisible }
+    }
+
+    private fun createDefaultPager(newsType: NewsType): Pager<Int, Article> {
+        return Pager(
+            config = defaultPagingConfig,
+            pagingSourceFactory = {
+                NewsPagingSource(
+                    newsRepository = newsRepository,
+                    newsType = newsType,
+                )
+            }
+        )
     }
 }
