@@ -5,8 +5,11 @@ import dev.martinsv.newsapp.news.domain.NewsPage
 import dev.martinsv.newsapp.news.domain.NewsRepository
 import kotlin.time.Clock
 
-class FakeNewsRepository() : NewsRepository {
-    private val articles: List<Article> = (1..100).map { createTestArticle(it) }
+class FakeNewsRepository(
+    articlesCount: Int = 100,
+    private val error: Throwable? = null,
+) : NewsRepository {
+    private val articles: List<Article> = (1..articlesCount).map { createTestArticle(it) }
 
     override suspend fun getEverything(
         query: String,
@@ -24,6 +27,7 @@ class FakeNewsRepository() : NewsRepository {
         getPage(page, pageSize)
 
     private fun getPage(page: Int, pageSize: Int): Result<NewsPage> {
+        if (error != null) return Result.failure(error)
         val items = articles.drop((page - 1) * pageSize).take(pageSize)
         return Result.success(NewsPage(items, totalResults = articles.size))
     }
