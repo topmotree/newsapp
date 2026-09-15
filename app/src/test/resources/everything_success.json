@@ -1,0 +1,46 @@
+
+{
+  "status": "ok",
+  "totalResults": 3,
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "Gizmodo.com"
+      },
+      "author": "Kyle Torpey",
+      "title": "Why Bitcoin’s Price Is Spiking This Week",
+      "description": "Bitcoin’s latest rally comes as Treasury debt buybacks and expanding U.S. sanctions highlight the risks of a dollar-dominated financial system.",
+      "url": "https://gizmodo.com/why-bitcoins-price-is-spiking-this-week-2000803801",
+      "urlToImage": "https://gizmodo.com/app/uploads/2026/08/why-bitcoin-price-is-spiking-1200x675.jpg",
+      "publishedAt": "2026-08-27T17:50:23Z",
+      "content": "Bitcoin is experiencing an epic rebound. After falling to a low of about $62,650 on Aug. 16, the cryptocurrency climbed to roughly $80,000 this week, putting the rally from that recent bottom at abou… [+5974 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Slashdot.org"
+      },
+      "author": "EditorDavid",
+      "title": "Bitcoin-based Liquid Network Says $320 Million Withdrawn in Hack",
+      "description": "Reuters reports:\n\n\nLiquid Network, a Bitcoin-based payments and settlement network, said on Sunday that about $320 million was withdrawn from its federation wallet in a hack.\n\"Purported white-hat hackers\" withdrew around 4,000 of the 4,200 bitcoin held in its…",
+      "url": "https://yro.slashdot.org/story/26/09/07/0727220/bitcoin-based-liquid-network-says-320-million-withdrawn-in-hack",
+      "urlToImage": "https://a.fsdn.com/sd/topics/bitcoin_64.png",
+      "publishedAt": "2026-09-07T07:30:00Z",
+      "content": "The Fine Print: The following comments are owned by whoever posted them. We are not responsible for them in any way."
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Gizmodo.com"
+      },
+      "author": "Kyle Torpey",
+      "title": "The U.S. Government Is Using Your Financial Data to Decide Who Gets Pulled Over",
+      "description": "Border Patrol is mining Americans’ financial activity to identify people for potential traffic stops.",
+      "url": "https://gizmodo.com/the-u-s-government-is-using-your-financial-data-to-decide-who-gets-pulled-over-2000809097",
+      "urlToImage": "https://gizmodo.com/app/uploads/2026/09/Financial-Data-Used-By-Police-Pull-Over-e1788959726700-1200x675.jpg",
+      "publishedAt": "2026-09-09T16:50:59Z",
+      "content": "Corporations have spent years building increasingly sophisticated systems for tracking Americans movements, purchases, communications, and other digital activity, while government agencies have incre… [+8952 chars]"
+    }
+  ]
+}
