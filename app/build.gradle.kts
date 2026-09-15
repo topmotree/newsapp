@@ -28,7 +28,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "dev.martinsv.newsapp.HiltTestRunner"
 
         buildConfigField(
             "String",
@@ -75,6 +75,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     testImplementation(libs.paging.testing)
+    androidTestImplementation(libs.hilt.android.testing)
+    kspAndroidTest(libs.hilt.compiler)
 
     //hilt
     implementation(libs.hilt)
