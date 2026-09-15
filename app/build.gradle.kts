@@ -77,6 +77,7 @@ dependencies {
     testImplementation(libs.paging.testing)
     androidTestImplementation(libs.hilt.android.testing)
     kspAndroidTest(libs.hilt.compiler)
+    androidTestImplementation(libs.androidx.espresso.intents)
 
     //hilt
     implementation(libs.hilt)
