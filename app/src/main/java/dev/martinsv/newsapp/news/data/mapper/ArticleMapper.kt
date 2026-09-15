@@ -17,7 +17,7 @@ class ArticleMapper @Inject constructor() {
             description = dto.description,
             url = dto.url,
             urlToImage = dto.urlToImage,
-            publishedAt = dto.publishedAt?.let { Instant.parse(it) },
+            publishedAt = dto.publishedAt?.let { Instant.parseOrNull(it) },
             content = dto.content
         )
 }
