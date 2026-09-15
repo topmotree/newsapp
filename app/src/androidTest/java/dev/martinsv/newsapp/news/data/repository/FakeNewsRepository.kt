@@ -17,8 +17,12 @@ class FakeNewsRepository(
         page: Int,
         pageSize: Int,
         language: String
-    ): Result<NewsPage> =
-        getPage(page, pageSize)
+    ): Result<NewsPage> {
+        return getPage(
+            page,
+            pageSize
+        ).map { page -> page.copy(articles = articles.map { it.copy(title = "${it.title} $query") }) }
+    }
 
     override suspend fun getTopHeadlines(
         page: Int,

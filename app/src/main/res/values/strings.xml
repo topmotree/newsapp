@@ -15,4 +15,6 @@
     <string name="global_retry_button_label">Retry</string>
     <string name="article_list_refresh_error_title">Error occurred</string>
     <string name="article_list_refresh_error_message">Check your connection or try again.</string>
+    <string name="article_list_close_search_button_descritpion">Close search</string>
+    <string name="article_list_open_search_button_descritpion">Open search</string>
 </resources>

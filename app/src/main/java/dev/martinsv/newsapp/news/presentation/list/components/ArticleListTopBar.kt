@@ -60,7 +60,8 @@ fun ArticleListTopBar(
                 ) {
                     Icon(
                         imageVector = if (isSearchBarVisible) IconSearchOff else IconSearch,
-                        contentDescription = null
+                        contentDescription = if (isSearchBarVisible) stringResource(R.string.article_list_close_search_button_descritpion)
+                        else stringResource(R.string.article_list_open_search_button_descritpion)
                     )
                 }
             },
