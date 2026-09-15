@@ -58,14 +58,6 @@ class RetrofitNewsRepositoryTest {
         )
     }
 
-    val errorBody = """
-        {
-        "status": "error",
-        "code": "apiKeyMissing",
-        "message": "Your API key is missing. Append this to the URL with the apiKey param, or use the x-api-key HTTP header."
-        }
-    """.trimIndent()
-
     @After
     fun tearDown() {
         server.close()
@@ -92,6 +84,13 @@ class RetrofitNewsRepositoryTest {
 
     @Test
     fun `api error returns NewsApiException with error code`() = runTest(dispatcher) {
+        val errorBody = """
+                {
+                "status": "error",
+                "code": "apiKeyMissing",
+                "message": "Your API key is missing. Append this to the URL with the apiKey param, or use the x-api-key HTTP header."
+                }
+            """.trimIndent()
         server.enqueue(MockResponse(code = 401, body = errorBody))
 
         val error = repository.getTopHeadlines(page = 1).exceptionOrNull()
