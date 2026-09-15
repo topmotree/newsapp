@@ -16,9 +16,9 @@ sealed interface NewsType {
 class NewsPagingSource(
     private val newsRepository: NewsRepository,
     private val newsType: NewsType,
-    //TODO handle when pageSize is more than 100
-    private val pageSize: Int = DEFAULT_PAGE_SIZE,
 ) : PagingSource<Int, Article>() {
+
+    private val pageSize = DEFAULT_PAGE_SIZE
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
         val nextPageNumber = params.key ?: 1
